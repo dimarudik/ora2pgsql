@@ -82,16 +82,19 @@ public class ProcessUtil {
                                         statement.setObject(i, null);
                                     }
                                     break;
+                                case 2005:
+                                    if (fetchResultSet.getObject(i) != null) {
+                                        statement.setBytes(i, convertClobToBytes(fetchResultSet, i).getBytes());
+                                    } else {
+                                        statement.setObject(i, null);
+                                    }
+                                    break;
                                 case 93:
                                     Date localDate = fetchResultSet.getTimestamp(i);
                                     statement.setObject(i, localDate);
                                     break;
                                 default:
-//                                logger.info("Here... " + buildInsertStatement(sqlStatement));
-//                                logger.info(fetchResultSet.getMetaData().getColumnType(i));
-//                                System.out.println(statement + " " + fetchResultSet.getMetaData().getColumnType(i) + " " + fetchResultSet.getObject(i));
                                     statement.setObject(i, fetchResultSet.getObject(i));
-//                                System.out.println("Here...");
                                     break;
                             }
                         } else {

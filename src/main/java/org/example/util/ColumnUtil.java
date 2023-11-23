@@ -107,4 +107,10 @@ public class ColumnUtil {
         int blobLength = (int) blob.length();
         return blob.getBytes(1, blobLength);
     }
+
+    public static String convertClobToBytes(ResultSet resultSet, int i) throws SQLException {
+        Clob clob = resultSet.getClob(i);
+        int clobLength = (int) clob.length();
+        return clob.getSubString(1L, clobLength);
+    }
 }
